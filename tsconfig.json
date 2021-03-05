@@ -1,0 +1,18 @@
+{
+    // "extends": "./tsconfig.template.json",
+    "compilerOptions": {
+        "target": "ES2020",
+        "module": "commonjs",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "esModuleInterop": true,
+        "outDir": "dist"
+    },
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "src/test",   
+        "src/migrations"     
+    ]
+}

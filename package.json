@@ -1,0 +1,41 @@
+{
+  "name": "@vidalii/vidalii-backend",
+  "version": "0.0.1",
+  "description": "Example integration of MikroORM into Koa (in typescript)",
+  "author": "Martin Adamek",
+  "license": "MIT",
+  "bin": "src/cli/index.js",
+  "scripts": {
+    "start": "tsc && node dist/server",
+    "test:cli":"nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/cli start'",
+    "test:cli:help":"nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/cli start --help'",
+    "test:1": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/test/test1 --transpile-only '",    
+    "build": "tsc",
+    "publish:public:patch": "tsc && npm version patch && ts-node publish.complement && npm publish 'dist' --access public",
+    "publish:public:minor": "tsc && npm version minor && ts-node publish.complement && npm publish 'dist' --access public",
+    "publish:public:major": "tsc && npm version major && ts-node publish.complement && npm publish 'dist' --access public"
+  },
+  "dependencies": {
+    "@mikro-orm/core": "^4.4.4",
+    "@mikro-orm/reflection": "^4.4.4",
+    "@mikro-orm/sql-highlighter": "^1.0.1",
+    "@mikro-orm/sqlite": "^4.4.4",
+    "cors": "^2.8.5",
+    "express-graphql": "^0.12.0",
+    "glob": "^7.1.6",
+    "graphql": "^15.5.0",
+    "graphql-playground-middleware-express": "^1.7.22",
+    "graphql-tools": "^7.0.4",
+    "reflect-metadata": "^0.1.13",
+    "typescript": "^4.2.2",
+    "yargs": "^15.4.1"
+  },
+  "devDependencies": {
+    "@mikro-orm/cli": "^4.0.0-rc.6",
+    "@types/cors": "^2.8.10",
+    "@types/glob": "^7.1.3",
+    "@types/yargs": "^16.0.0",
+    "nodemon": "^2.0.4",
+    "ts-node": "^9.1.1"
+  }
+}
