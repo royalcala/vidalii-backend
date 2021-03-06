@@ -11,7 +11,7 @@
   },
   "license": "MIT",
   "bin": {
-    "vidalii-backend": "dist/cli.js"
+    "vidalii": "dist/cli.js"
   },
   "scripts": {
     "start": "tsc && node dist/server",
