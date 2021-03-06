@@ -7,9 +7,7 @@
     "email": "alcala.rao@gmail.com"
   },
   "license": "MIT",
-  "bin": {
-    "vidalii-backend": "src/cli/index.js"
-  },
+  "bin":  "dist/cli.js",
   "scripts": {
     "start": "tsc && node dist/server",
     "test:cli": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/cli start'",
