@@ -1,8 +1,11 @@
 {
   "name": "@vidalii/vidalii-backend",
   "version": "0.0.2",
-  "description": "Example integration of MikroORM into Koa (in typescript)",
-  "author": "Martin Adamek",
+  "description": "Vidalii backend cli",
+  "author": {
+    "name":"Roy Alcala Ortiz",
+    "email": "alcala.rao@gmail.com"
+  },
   "license": "MIT",
   "bin": {
     "vidalii-backend": "src/cli/index.js"
@@ -15,7 +18,9 @@
     "git:stage:all": " git add .",
     "git:commit": "git commit -m '...'",
     "create:dist": "rm -rf dist && mkdir dist && cp package.json dist/package.json -r && tsc --project tsconfig.json",
-    "publish:public:patch": "npm run git:stage:all && npm run git:commit && npm version patch && npm run create:dist && npm publish dist --access public"
+    "publish:public:patch:git": "npm run git:stage:all && npm run git:commit && npm version patch && npm run create:dist && npm publish ./dist --access public",
+    "publish:public": "npm publish ./dist --access public"
+
   },
   "dependencies": {
     "@mikro-orm/core": "^4.4.4",
