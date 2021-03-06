@@ -11,7 +11,7 @@
   },
   "license": "MIT",
   "bin": {
-    "vidalii": "dist/cli.js"
+    "server": "dist/cli.js"
   },
   "scripts": {
     "start": "tsc && node dist/server",
