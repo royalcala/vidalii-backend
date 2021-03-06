@@ -63,6 +63,8 @@ yargs
 
         },
         async (args: OptionsCli) => {
+            const packageJson = require('../package.json')
+            console.log(`${packageJson.name}:${packageJson.version}`)
             Vidalii.cli = args
             if (!fs.existsSync(args.DB_NAME)) {
                 fs.mkdirSync(args.DB_NAME, { recursive: true })
