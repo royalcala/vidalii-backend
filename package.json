@@ -1,6 +1,6 @@
 {
   "name": "@vidalii/vidalii-backend",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Vidalii backend cli",
   "files": [
     "dist"
@@ -10,7 +10,9 @@
     "email": "alcala.rao@gmail.com"
   },
   "license": "MIT",
-  "bin": "dist/cli.js",
+  "bin": {
+    "vidalii-backend": "dist/cli.js"
+  },
   "scripts": {
     "start": "tsc && node dist/server",
     "test:cli": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/cli start'",
