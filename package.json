@@ -1,10 +1,12 @@
 {
   "name": "@vidalii/vidalii-backend",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Example integration of MikroORM into Koa (in typescript)",
   "author": "Martin Adamek",
   "license": "MIT",
-  "bin": "src/cli/index.js",
+  "bin": {
+    "vidalii-backend": "src/cli/index.js"
+  },
   "scripts": {
     "start": "tsc && node dist/server",
     "test:cli": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/cli start'",
