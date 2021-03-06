@@ -11,10 +11,9 @@
   },
   "license": "MIT",
   "bin": {
-    "start": "dist/cli.js"
+    "service": "dist/cli.js"
   },
   "scripts": {
-    "start": "tsc && node dist/server",
     "test:cli": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/cli start'",
     "test:cli:help": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/cli start --help'",
     "test:1": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/test/test1 --transpile-only '",
