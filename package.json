@@ -2,6 +2,9 @@
   "name": "@vidalii/vidalii-backend",
   "version": "0.0.4",
   "description": "Vidalii backend cli",
+  "files": [
+    "dist"
+  ],
   "author": {
     "name": "Roy Alcala Ortiz",
     "email": "alcala.rao@gmail.com"
@@ -17,8 +20,8 @@
     "test:1": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/test/test1 --transpile-only '",
     "git:stage:all": " git add .",
     "git:commit": "git commit -m '...'",
-    "create:dist": "rm -rf dist && mkdir dist && cp package.json dist/package.json -r && tsc --project tsconfig.json",
-    "publish:public:patch:git": "npm run git:stage:all && npm run git:commit && npm version patch && npm run create:dist && npm publish ./dist --access public",
+    "create:dist": "rm -rf dist && mkdir dist && tsc --project tsconfig.json",
+    "publish:public:patch:git": "npm run git:stage:all && npm run git:commit && npm version patch && npm run create:dist && npm publish",
     "publish:public": "npm publish ./dist --access public"
   },
   "dependencies": {
