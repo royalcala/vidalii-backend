@@ -10,9 +10,7 @@
     "email": "alcala.rao@gmail.com"
   },
   "license": "MIT",
-  "bin": {
-    "server": "dist/cli.js"
-  },
+  "bin": "dist/cli.js",
   "scripts": {
     "start": "tsc && node dist/server",
     "test:cli": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/cli start'",
