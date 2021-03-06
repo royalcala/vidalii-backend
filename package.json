@@ -1,9 +1,9 @@
 {
   "name": "@vidalii/vidalii-backend",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Vidalii backend cli",
   "author": {
-    "name":"Roy Alcala Ortiz",
+    "name": "Roy Alcala Ortiz",
     "email": "alcala.rao@gmail.com"
   },
   "license": "MIT",
@@ -20,7 +20,6 @@
     "create:dist": "rm -rf dist && mkdir dist && cp package.json dist/package.json -r && tsc --project tsconfig.json",
     "publish:public:patch:git": "npm run git:stage:all && npm run git:commit && npm version patch && npm run create:dist && npm publish ./dist --access public",
     "publish:public": "npm publish ./dist --access public"
-
   },
   "dependencies": {
     "@mikro-orm/core": "^4.4.4",
