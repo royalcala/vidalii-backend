@@ -9,11 +9,9 @@
     "start": "tsc && node dist/server",
     "test:cli":"nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/cli start'",
     "test:cli:help":"nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/cli start --help'",
-    "test:1": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/test/test1 --transpile-only '",    
-    "build": "tsc",
-    "publish:public:patch": "tsc && npm version patch && ts-node publish.complement && npm publish 'dist' --access public",
-    "publish:public:minor": "tsc && npm version minor && ts-node publish.complement && npm publish 'dist' --access public",
-    "publish:public:major": "tsc && npm version major && ts-node publish.complement && npm publish 'dist' --access public"
+    "test:1": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/test/test1 --transpile-only '",        
+    "create:dist": "rm -rf dist && mkdir dist && cp package.json dist/package.json -r && tsc --project tsconfig.json",
+    "publish:public:patch": "npm version patch && npm run create:dist && npm publish dist --access public"
   },
   "dependencies": {
     "@mikro-orm/core": "^4.4.4",
