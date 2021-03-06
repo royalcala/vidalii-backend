@@ -1,13 +1,15 @@
 {
   "name": "@vidalii/vidalii-backend",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Vidalii backend cli",
   "author": {
     "name": "Roy Alcala Ortiz",
     "email": "alcala.rao@gmail.com"
   },
   "license": "MIT",
-  "bin":  "dist/cli.js",
+  "bin": {
+    "vidalii-backend": "dist/cli.js"
+  },
   "scripts": {
     "start": "tsc && node dist/server",
     "test:cli": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/cli start'",
