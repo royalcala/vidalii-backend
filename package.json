@@ -5,7 +5,7 @@
   "bin": {
     "service": "dist/cli.js"
   },
-  "main": "./dist/vidalii.js",
+  "main": "./dist",
   "files": [
     "dist"
   ],
