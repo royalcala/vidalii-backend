@@ -6,6 +6,7 @@
     "service": "dist/cli.js"
   },
   "main": "./dist",
+  "types": "dist",
   "files": [
     "dist"
   ],

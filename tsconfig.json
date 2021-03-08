@@ -6,13 +6,16 @@
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "esModuleInterop": true,
-        "outDir": "dist"
+        "allowJs": true,
+        // Generate d.ts files
+        "declaration": true,
+        "outDir": "dist",
     },
     "include": [
         "src"
     ],
     "exclude": [
-        "src/test",   
-        "src/migrations"     
+        "src/test",
+        "src/migrations"
     ]
 }
