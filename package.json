@@ -3,7 +3,7 @@
   "version": "0.0.23",
   "description": "Vidalii backend cli",
   "bin": {
-    "vidalii-backend": "dist/cli.js"
+    "service": "dist/cli.js"
   },
   "main": "./dist/vidalii.js",
   "files": [
