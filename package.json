@@ -1,8 +1,10 @@
 {
   "name": "@vidalii/vidalii-backend",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "Vidalii backend cli",
-  "bin": "./dist/cli.js",
+  "bin": {
+    "vidalii-backend": "dist/cli.js"
+  },
   "main": "./dist/vidalii.js",
   "files": [
     "dist"
