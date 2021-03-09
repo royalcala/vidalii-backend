@@ -6,7 +6,7 @@ import Path from "path";
 
 
 export type OptionsCli = {
-    PATTERN: string
+    INPUT: string
     ENV: 'production' | 'testing',
     PORT: number,
     DB_NAME: string,
@@ -20,8 +20,8 @@ yargs
         'start', 'vidalii service',
         (yargs: yargs.Argv<OptionsCli>) => {
             yargs
-                .option('PATTERN', {
-                    describe: 'default **/*.[entity|api].{js,ts}',
+                .option('INPUT', {
+                    describe: 'use glob pattern',
                     type: 'string',
                     default: '**/*',
                 })
@@ -74,4 +74,5 @@ yargs
                 console.log(`Using data directory:${args.DB_NAME}`)
             await Vidalii.start()
         }
-    ).argv
+    )
+    .argv

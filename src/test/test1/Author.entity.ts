@@ -1,5 +1,5 @@
 import Vidalii from '../../vidalii'
-import { Cascade, Collection, Entity, OneToMany, Property, ManyToOne, Unique } from '@mikro-orm/core';
+import { Cascade, Collection, Entity, OneToMany, Property, ManyToOne, Unique } from '../../vidalii.orm';
 
 // import { Book } from '.';
 import { BaseEntity } from './BaseEntity.entity';

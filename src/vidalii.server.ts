@@ -8,7 +8,7 @@ import type { Api } from "./vidalii.api";
 import type { DB, Em } from "./vidalii.db";
 import type { Request, Response } from 'express';
 import { execute } from "graphql";
-import { OptionsCli } from './cli';
+import { OptionsCli } from './service.cli';
 
 export interface Context {
     req: Request;

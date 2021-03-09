@@ -1,0 +1,11 @@
+type Author {
+  name: String
+}
+
+type Query {
+  test: String
+}
+
+type Mutation {
+  AuthorInsert(name: String): Author
+}

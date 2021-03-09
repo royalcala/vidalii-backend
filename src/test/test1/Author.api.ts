@@ -1,6 +1,6 @@
 import Vidalii from '../../vidalii'
 import { Author } from './Author.entity'
-import type { Context } from '../../vidalii'
+import type { Context } from '../..'
 const typeDefs = `
 type Author{
   name: String

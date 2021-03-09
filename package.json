@@ -3,7 +3,8 @@
   "version": "0.0.27",
   "description": "Vidalii backend cli",
   "bin": {
-    "service": "dist/cli.js"
+    "service": "dist/service.cli.js",
+    "graphql": "dist/generate.cli.js"
   },
   "main": "./dist",
   "types": "dist",
@@ -16,6 +17,7 @@
   },
   "license": "MIT",
   "scripts": {
+    "test:cli:graphql": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/graphql.cli generate INPUT=test/test1 --OUTPUT=src/test/test1'",
     "test:cli": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/cli start'",
     "test:cli:help": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/cli start --help'",
     "test:1": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/test/test1 --transpile-only '",
@@ -32,6 +34,7 @@
     "@mikro-orm/sqlite": "^4.4.4",
     "cors": "^2.8.5",
     "express-graphql": "^0.12.0",
+    "fs-extra": "^9.1.0",
     "glob": "^7.1.6",
     "graphql": "^15.5.0",
     "graphql-playground-middleware-express": "^1.7.22",
@@ -39,5 +42,8 @@
     "reflect-metadata": "^0.1.13",
     "typescript": "^4.2.2",
     "yargs": "^15.4.1"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.8"
   }
 }

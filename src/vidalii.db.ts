@@ -3,7 +3,7 @@ import { EntityClass, EntityClassGroup } from '@mikro-orm/core/typings';
 import { SqlHighlighter } from '@mikro-orm/sql-highlighter';
 
 import { Connection, IDatabaseDriver, MikroORM, EntityManager, Options, AnyEntity, EntitySchema } from '@mikro-orm/core';
-import { OptionsCli } from './cli';
+import { OptionsCli } from './service.cli';
 // import { Author } from "./test/test1/Author.entity";
 // import { BaseEntity } from "./test/test1/BaseEntity.entity";
 export type Em = EntityManager<IDatabaseDriver<Connection>>
