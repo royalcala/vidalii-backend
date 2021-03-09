@@ -1,6 +1,6 @@
 {
   "name": "@vidalii/vidalii-backend",
-  "version": "0.0.27",
+  "version": "0.0.28",
   "description": "Vidalii backend cli",
   "bin": {
     "service": "dist/service.cli.js",
