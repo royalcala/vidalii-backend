@@ -1,14 +1,14 @@
 import Vidalii from '../../vidalii'
 import { Author } from './Author.entity'
 import type { Context } from '../..'
-const typeDefs = `
+const typeDefs = `#graphql
 type Author{
   name: String
 }
-type Query {
+extend type Query {
     test: String
   }
-type Mutation {
+extend type Mutation {
   AuthorInsert(name:String):Author
   
 }

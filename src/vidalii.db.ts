@@ -36,14 +36,16 @@ export class DB {
 
     public async start(cli: OptionsCli): Promise<void> {
         try {
-            this.ormConfig.dbName = cli.DB_NAME
-            this.ormConfig.cache = {
-                enabled: true,
-                pretty: true,
-                options: { cacheDir: cli.DB_CACHE }
-            }
+            // this.ormConfig.dbName = cli.DB_NAME
+            // this.ormConfig.cache = {
+            //     enabled: true,
+            //     pretty: true,
+            //     options: { cacheDir: cli.DB_CACHE }
+            // }
             this.ormConfig.entities = [...this.entities.values()] as any
             console.log(this.ormConfig.entities)
+            console.log('dbName::', this.ormConfig.dbName)
+            this.ormConfig.dbName = 'src/test/test1/data.db'
             this.orm = await MikroORM.init(this.ormConfig);
             const generator = this.orm.getSchemaGenerator();
             // const dropDump = await generator.getDropSchemaSQL();

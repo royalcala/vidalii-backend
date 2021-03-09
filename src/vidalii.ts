@@ -4,9 +4,6 @@ import { Api } from "./vidalii.api";
 import { VServer } from "./vidalii.server";
 import type { OptionsCli } from './service.cli';
 
-
-
-
 class VidaliiService {
   public cli: OptionsCli
   public db = new DB()
@@ -33,7 +30,8 @@ class VidaliiService {
     )
   }
 
-  public async start(): Promise<void> {
+  public async start(cli: OptionsCli): Promise<void> {
+    this.cli = cli
     this.initApi(this.cli.INPUT)
     this.initEntities(this.cli.INPUT)
     await this.db.start(this.cli)

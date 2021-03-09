@@ -2,6 +2,10 @@
     // "extends": "./tsconfig.template.json",
     "compilerOptions": {
         "target": "ES2020",
+        "lib": [
+            "ES2020",
+            "esnext.asynciterable"
+        ],
         "module": "commonjs",
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,

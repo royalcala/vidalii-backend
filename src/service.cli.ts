@@ -37,7 +37,7 @@ yargs
                 //TODO only for slite
                 .option('DB_NAME', {
                     type: 'string',
-                    default: 'data.db',
+                    default: '.',
                     description: '',
                     coerce: (value) => {
                         return Path.resolve(value)
@@ -65,14 +65,13 @@ yargs
         async (args: OptionsCli) => {
             const packageJson = require('../package.json')
             console.log(`${packageJson.name}:${packageJson.version}`)
-            Vidalii.cli = args
             if (!fs.existsSync(args.DB_NAME)) {
                 fs.mkdirSync(args.DB_NAME, { recursive: true })
                 console.log(`Created data directory:${args.DB_NAME}`)
             }
             else
                 console.log(`Using data directory:${args.DB_NAME}`)
-            await Vidalii.start()
+            await Vidalii.start(args)
         }
     )
     .argv

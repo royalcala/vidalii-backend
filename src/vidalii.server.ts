@@ -22,13 +22,14 @@ export class VServer {
     public async start(db: DB, api: Api, cli: OptionsCli) {
         this.host = express();
         this.host.use(cors());
-        if (cli.ENV !== 'production') {
-            this.host.get('/graphql', expressPlayground({ endpoint: '/graphql' }));
-        }
+        const endpoint = '/graphql'
+        // if (cli.ENV !== 'production') {
+        this.host.get('/graphqli', expressPlayground({ endpoint }));
+        // }
         try {
-            const schema = api.getSchemaApi()
+            const schema = await api.getSchemaApi()
             this.host.post(
-                '/graphql',
+                endpoint,
                 graphqlHTTP(
                     (req, res) => ({
                         schema,
@@ -52,9 +53,8 @@ export class VServer {
                 res.status(400).send(error);
             });
 
-            const port = process.env.PORT || 4000;
-            this.server = this.host.listen(port, () => {
-                console.log(`🚀 http://localhost:${port}/graphql`);
+            this.server = this.host.listen(cli.PORT, () => {
+                console.log(`🚀 http://localhost:${cli.PORT}/graphql`);
             });
         } catch (error) {
             console.error('📌 Could not start server', error);
