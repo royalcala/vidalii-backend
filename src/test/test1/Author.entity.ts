@@ -1,3 +1,4 @@
+import { PrimaryKey } from '@mikro-orm/core';
 import Vidalii from '../../vidalii'
 import { Cascade, Collection, Entity, OneToMany, Property, ManyToOne, Unique } from '../../vidalii.orm';
 
@@ -6,12 +7,13 @@ import { BaseEntity } from './BaseEntity.entity';
 
 @Entity()
 export class Author extends BaseEntity {
+  @PrimaryKey()
+  _id: string
 
   @Property()
-  name: String;
+  name: string;
 
   @Property()
-  @Unique()
   email: string;
 
   @Property()

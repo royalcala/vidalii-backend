@@ -1,0 +1,55 @@
+{
+  "data": {
+    "propertyOrder": {},
+    "properties": {
+      "_id": {
+        "name": "_id",
+        "reference": "scalar",
+        "primary": true,
+        "type": "String"
+      },
+      "name": {
+        "name": "name",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "String"
+      }
+    },
+    "props": [
+      {
+        "name": "_id",
+        "reference": "scalar",
+        "primary": true,
+        "type": "String"
+      },
+      {
+        "name": "name",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "String"
+      }
+    ],
+    "primaryKeys": [
+      "_id"
+    ],
+    "filters": {},
+    "hooks": {},
+    "indexes": [],
+    "uniques": [],
+    "className": "BookEntity",
+    "path": "./src/test/test1/Book.entity.ts",
+    "name": "BookEntity",
+    "abstract": false,
+    "constructorParams": [],
+    "toJsonParams": [],
+    "useCache": true,
+    "compositePK": false,
+    "relations": [],
+    "collection": "book_entity"
+  },
+  "origin": "./src/test/test1/Book.entity.ts",
+  "hash": "c6b22c04ec6d328d245c48dfa6a81f4f",
+  "version": "4.4.4"
+}

@@ -20,9 +20,9 @@ function test() {
 }
 Vidalii.api.addResolver('Query', test)
 
-function AuthorInsert(parent, args: { name: String }, cxt: Context) {
+export function AuthorInsert(parent, args: { name: String }, cxt: Context) {
   const author = new Author()
-  author.name = args.name
+  // author.name = args.name
   cxt.em.persist(author)
   return author
 }

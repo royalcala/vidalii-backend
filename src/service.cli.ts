@@ -9,9 +9,9 @@ export type OptionsCli = {
     INPUT: string
     ENV: 'production' | 'testing',
     PORT: number,
-    DB_NAME: string,
-    DB_MIGRATIONS: string,
-    DB_CACHE: string
+    DB_PATH: string,
+    // DB_MIGRATIONS: string,
+    // DB_CACHE: string
 
 }
 
@@ -23,54 +23,57 @@ yargs
                 .option('INPUT', {
                     describe: 'use glob pattern',
                     type: 'string',
-                    default: '**/*',
+                    default: 'src/**/*',
+                    coerce: (value) => {
+                        return Path.resolve(value)
+                    }
                 })
-                .option('ENV', {
-                    type: 'string',
-                    choices: ['production', 'testing'],
-                    default: 'production'
-                })
+                // .option('ENV', {
+                //     type: 'string',
+                //     choices: ['production', 'testing'],
+                //     default: 'production'
+                // })
                 .option('PORT', {
                     type: 'number',
                     default: 4000
                 })
                 //TODO only for slite
-                .option('DB_NAME', {
+                .option('DB_PATH', {
                     type: 'string',
                     default: '.',
-                    description: '',
+                    description: 'directory for local db, migrations and cache',
                     coerce: (value) => {
                         return Path.resolve(value)
                     }
                 })
-                .option('DB_MIGRATIONS', {
-                    type: 'string',
-                    default: '.',
-                    description: '',
-                    coerce: (value) => {
-                        return Path.resolve(value)
-                    }
-                })
-                .option('DB_CACHE', {
-                    type: 'string',
-                    default: '.',
-                    description: 'entity metadata ',
-                    coerce: (value) => {
-                        return Path.resolve(value)
-                    }
-                })
+            // .option('DB_MIGRATIONS', {
+            //     type: 'string',
+            //     default: '.',
+            //     description: '',
+            //     coerce: (value) => {
+            //         return Path.resolve(value)
+            //     }
+            // })
+            // .option('DB_CACHE', {
+            //     type: 'string',
+            //     default: '.',
+            //     description: 'entity metadata ',
+            //     coerce: (value) => {
+            //         return Path.resolve(value)
+            //     }
+            // })
 
 
         },
         async (args: OptionsCli) => {
             const packageJson = require('../package.json')
             console.log(`${packageJson.name}:${packageJson.version}`)
-            if (!fs.existsSync(args.DB_NAME)) {
-                fs.mkdirSync(args.DB_NAME, { recursive: true })
-                console.log(`Created data directory:${args.DB_NAME}`)
+            if (!fs.existsSync(args.DB_PATH)) {
+                fs.mkdirSync(args.DB_PATH, { recursive: true })
+                console.log(`Created data directory:${args.DB_PATH}`)
             }
             else
-                console.log(`Using data directory:${args.DB_NAME}`)
+                console.log(`Using data directory:${args.DB_PATH}`)
             await Vidalii.start(args)
         }
     )

@@ -13,17 +13,18 @@ export class DB {
     public entities = new Map() as Map<string, EntityClass<AnyEntity>>
     public ormConfig: Options = {
         metadataProvider: TsMorphMetadataProvider,
-        migrations: {
-            path: './src/migrations',//TODO define in root path
-            tableName: 'migrations',
-            transactional: true,
-        },
+        // migrations: {
+        //     path: './src/migrations',//TODO define in root path
+        //     tableName: 'migrations',
+        //     transactional: true,
+        // },
         tsNode: process.env.NODE_DEV === 'true' ? true : false,
         type: 'sqlite',
         // as we are using class references here, we don't need to specify `entitiesTs` option
         // entities: [Author, BaseEntity],
         highlighter: new SqlHighlighter(),
         debug: true,
+
     }
     public orm: MikroORM<IDatabaseDriver<Connection>>
 
@@ -36,16 +37,21 @@ export class DB {
 
     public async start(cli: OptionsCli): Promise<void> {
         try {
-            // this.ormConfig.dbName = cli.DB_NAME
-            // this.ormConfig.cache = {
-            //     enabled: true,
-            //     pretty: true,
-            //     options: { cacheDir: cli.DB_CACHE }
-            // }
-            this.ormConfig.entities = [...this.entities.values()] as any
-            console.log(this.ormConfig.entities)
-            console.log('dbName::', this.ormConfig.dbName)
-            this.ormConfig.dbName = 'src/test/test1/data.db'
+            this.ormConfig.migrations = {
+                path: cli.DB_PATH,
+                tableName: 'migrations',
+                transactional: true
+            }
+            this.ormConfig.entities = [cli.INPUT + '.entity.ts']
+            // this.ormConfig.entitiesTs = ['src/**/*.entity.ts']
+            this.ormConfig.dbName = cli.DB_PATH + '/data.db'
+            this.ormConfig.cache = {
+                enabled: true,
+                pretty: true,
+                options: { cacheDir: cli.DB_PATH }
+            }
+            // this.ormConfig.entities = [...this.entities.values()] as any
+            // this.ormConfig.dbName = 'src/test/test1/data.db'
             this.orm = await MikroORM.init(this.ormConfig);
             const generator = this.orm.getSchemaGenerator();
             // const dropDump = await generator.getDropSchemaSQL();

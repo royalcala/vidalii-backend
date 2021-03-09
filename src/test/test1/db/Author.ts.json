@@ -1,0 +1,116 @@
+{
+  "data": {
+    "propertyOrder": {},
+    "properties": {
+      "_id": {
+        "name": "_id",
+        "reference": "scalar",
+        "primary": true,
+        "type": "string"
+      },
+      "name": {
+        "name": "name",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "string"
+      },
+      "email": {
+        "name": "email",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "string"
+      },
+      "age": {
+        "name": "age",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "number",
+        "nullable": true
+      },
+      "termsAccepted": {
+        "name": "termsAccepted",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "boolean"
+      },
+      "born": {
+        "name": "born",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "Date",
+        "nullable": true
+      }
+    },
+    "props": [
+      {
+        "name": "_id",
+        "reference": "scalar",
+        "primary": true,
+        "type": "string"
+      },
+      {
+        "name": "name",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "string"
+      },
+      {
+        "name": "email",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "string"
+      },
+      {
+        "name": "age",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "number",
+        "nullable": true
+      },
+      {
+        "name": "termsAccepted",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "boolean"
+      },
+      {
+        "name": "born",
+        "reference": "scalar",
+        "getter": false,
+        "setter": false,
+        "type": "Date",
+        "nullable": true
+      }
+    ],
+    "primaryKeys": [
+      "_id"
+    ],
+    "filters": {},
+    "hooks": {},
+    "indexes": [],
+    "uniques": [],
+    "className": "Author",
+    "path": "./src/test/test1/Author.entity.ts",
+    "name": "Author",
+    "abstract": false,
+    "constructorParams": [],
+    "toJsonParams": [],
+    "extends": "BaseEntity",
+    "useCache": true,
+    "compositePK": false,
+    "relations": [],
+    "collection": "author"
+  },
+  "origin": "./src/test/test1/Author.entity.ts",
+  "hash": "d9e7715eff404948d2951066753bd980",
+  "version": "4.4.4"
+}

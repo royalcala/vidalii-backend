@@ -1,5 +1,6 @@
 import { makeExecutableSchema } from 'graphql-tools'
 import { buildSchema, buildTypeDefsAndResolvers, Resolver, Query, Mutation } from 'type-graphql';
+import { OptionsCli } from './service.cli';
 
 
 export class Api {
@@ -11,11 +12,11 @@ export class Api {
   }
 
   public addType(name: string, type: string) {
-    console.log('addType', name)
+    // console.log('addType', name)
     this.type.set(name, type)
   }
   public addResolver(type: keyof Api['resolver'], resolver: Function, options: 'replace' | 'pre' | 'post' = 'replace') {
-    console.log('addResolver:', resolver.name)
+    // console.log('addResolver:', resolver.name)
     const optionReplace = (type: keyof Api['resolver'], resolver) => {
       this.resolver[type].set(resolver.name, resolver)
     }
@@ -37,18 +38,16 @@ export class Api {
       dataPlain.resolvers.Mutation = Object.fromEntries(this.resolver.Mutation)
     return dataPlain
   }
-  private async getGqlClass() {
+  private async getGqlClass(cli:OptionsCli) {
     const dataClass = await buildTypeDefsAndResolvers({
-      resolvers: [__dirname + "**/*.api.{ts,js}", __dirname + '/vidalii.default.api.{ts,js}'],
+      resolvers: [cli.INPUT + ".api.{ts,js}", __dirname + '/vidalii.default.api.{ts,js}'],
     })
-    console.log(dataClass.typeDefs)
-    console.log(dataClass.resolvers)
     return dataClass
   }
 
-  public async getSchemaApi() {
+  public async getSchemaApi(cli:OptionsCli) {
     const dataFn = this.getGqlPlain()
-    const dataClass = await this.getGqlClass()
+    const dataClass = await this.getGqlClass(cli)
     const typeDefs =
      dataFn.typeDefs
       + '\n'
@@ -59,7 +58,7 @@ export class Api {
     }
     const schema = makeExecutableSchema({
       typeDefs,
-      resolvers
+      resolvers,      
     })
     return schema
   }

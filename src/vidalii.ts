@@ -10,30 +10,30 @@ class VidaliiService {
   public api = new Api()
   public server = new VServer()
 
-  public initApi(globPattern: string) {
-    console.log('Discovering .api files...\n')
-    glob.sync(`${globPattern}.api.{js,ts}`, { absolute: true }).forEach(
-      path => {
-        console.log(path)
-        require(path)
-      }
-    )
+  // public initApi(globPattern: string) {
+  //   console.log('Discovering .api files...\n')
+  //   glob.sync(`${globPattern}.api.{js,ts}`, { absolute: true }).forEach(
+  //     path => {
+  //       console.log(path)
+  //       require(path)
+  //     }
+  //   )
 
-  }
-  public initEntities(globPattern: string) {
-    console.log('Discovering .entity files...\n')
-    glob.sync(`${globPattern}.entity.{js,ts}`, { absolute: true }).forEach(
-      (path) => {
-        console.log(path)
-        require(path)
-      }
-    )
-  }
+  // }
+  // public initEntities(globPattern: string) {
+  //   console.log('Discovering .entity files...\n')
+  //   glob.sync(`src/${globPattern}.entity.{js,ts}`, { absolute: true }).forEach(
+  //     (path) => {
+  //       console.log(path)
+  //       require(path)
+  //     }
+  //   )
+  // }
 
   public async start(cli: OptionsCli): Promise<void> {
     this.cli = cli
-    this.initApi(this.cli.INPUT)
-    this.initEntities(this.cli.INPUT)
+    // this.initApi(this.cli.INPUT)
+    // this.initEntities(this.cli.INPUT)
     await this.db.start(this.cli)
     await this.server.start(this.db, this.api, this.cli)
   }

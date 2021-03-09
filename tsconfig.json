@@ -1,5 +1,4 @@
 {
-    // "extends": "./tsconfig.template.json",
     "compilerOptions": {
         "target": "ES2020",
         "lib": [
