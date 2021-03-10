@@ -6,7 +6,8 @@
   "types": "dist",
   "bin": {
     "service": "dist/service.cli.js",
-    "graphql": "dist/graphql.cli.js"
+    "graphql": "dist/graphql.cli.js",
+    "test": "dist/test.cli.js"
   },
   "files": [
     "dist"
