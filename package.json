@@ -1,6 +1,6 @@
 {
   "name": "@vidalii/backend",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "bin": {
     "backend": "cli.js"
   },
