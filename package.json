@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@mikro-orm/core": "^4.4.4",
+    "@mikro-orm/migrations": "^4.4.4",
     "@mikro-orm/reflection": "^4.4.4",
     "@mikro-orm/sql-highlighter": "^1.0.1",
     "@mikro-orm/sqlite": "^4.4.4",

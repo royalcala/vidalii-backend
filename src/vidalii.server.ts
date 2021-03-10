@@ -1,13 +1,8 @@
 import express from 'express';
 // import 'express-async-errors';
-import cors from 'cors';
-import { graphqlHTTP } from 'express-graphql';
-import expressPlayground from 'graphql-playground-middleware-express';
 import { Server } from 'http';
 import type { Api } from "./vidalii.api";
 import type { DB, Em } from "./vidalii.db";
-import type { Request, Response } from 'express';
-import { execute } from "graphql";
 import { OptionsCli } from './service.cli';
 import { ApolloServer } from 'apollo-server';
 
