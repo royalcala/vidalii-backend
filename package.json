@@ -1,7 +1,9 @@
 {
   "name": "@vidalii/backend",
-  "version": "0.0.22",
-  "bin": "./cli.js",
+  "version": "0.0.23",
+  "bin": {
+    "backend": "cli.js"
+  },
   "author": {
     "name": "Roy Alcala Ortiz",
     "email": "alcala.rao@gmail.com"
