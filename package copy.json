@@ -1,16 +1,20 @@
 {
-  "name": "@vidalii/backend",
-  "version": "0.0.22",
-  "bin": "./cli.js",
+  "name": "@vidalii/vidalii-backend",
+  "version": "0.0.35",
+  "description": "Vidalii backend cli",
+  "main": "dist",
+  "bin": {
+    "service": "dist/service.cli.js",
+    "graphql": "dist/graphql.cli.js",
+    "test": "dist/test.cli.js",
+    "test2": "test.cli.js",
+    "test3": "testcli.js"
+  },
   "author": {
     "name": "Roy Alcala Ortiz",
     "email": "alcala.rao@gmail.com"
   },
   "license": "MIT",
-  "files": [
-    "dist",
-    "cli.js"
-  ],
   "scripts": {
     "test:service:test1": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/service.cli start --INPUT=src/test/test1/**/* --DB_PATH=src/test/test1/db'",
     "test:cli:graphql": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/graphql.cli generate INPUT=test/test1 --OUTPUT=src/test/test1'",
