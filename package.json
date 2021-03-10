@@ -1,6 +1,6 @@
 {
   "name": "@vidalii/vidalii-backend",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "Vidalii backend cli",
   "main": "./dist",
   "types": "dist",
