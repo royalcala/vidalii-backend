@@ -30,10 +30,11 @@ yargs
                 })
         },
         async (args: OptionsCli) => {
-            VidaliiService.initApi(args.INPUT)
-            const typeDefs = [...VidaliiService.api.type.values()].join('/n')            
-            const schema = buildSchema(typeDefs)
-            const prettier =printSchema(schema)            
+            //TODO check if works
+            const schema = await VidaliiService.api.getSchemaApi(args as any)            
+            // const typeDefs = [...VidaliiService.api.type.values()].join('/n')
+            // const schema = buildSchema(typeDefs)
+            const prettier = printSchema(schema)
             fse.outputFileSync(args.OUTPUT + '/typeDefs.graphql', prettier)
         }
     )

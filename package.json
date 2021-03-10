@@ -17,15 +17,15 @@
   },
   "license": "MIT",
   "scripts": {
+    "test:service:test1": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/service.cli start --INPUT=src/test/test1/**/* --DB_PATH=src/test/test1/db'",
     "test:cli:graphql": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/graphql.cli generate INPUT=test/test1 --OUTPUT=src/test/test1'",
     "test:cli": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/cli start'",
     "test:cli:help": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/cli start --help'",
-    "test:1": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/service.cli start --INPUT=src/test/test1/**/* --DB_PATH=src/test/test1/db'",
     "git:stage:all": " git add .",
     "git:commit": "git commit -m '...'",
     "create:dist": "rm -rf dist && mkdir dist && tsc --project tsconfig.json",
-    "publish:public:patch:git": "npm run git:stage:all && npm run git:commit && npm version patch && npm run create:dist && npm publish",
-    "publish:public": "npm publish"
+    "publish:public": "npm publish",
+    "publish:public:patch:git": "npm run git:stage:all && npm run git:commit && npm version patch && npm run create:dist && npm publish"
   },
   "dependencies": {
     "@mikro-orm/core": "^4.4.4",

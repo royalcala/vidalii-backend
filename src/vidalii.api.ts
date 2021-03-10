@@ -46,8 +46,8 @@ export class Api {
   }
 
   public async getSchemaApi(cli:OptionsCli) {
-    const dataFn = this.getGqlPlain()
     const dataClass = await this.getGqlClass(cli)
+    const dataFn = this.getGqlPlain()
     const typeDefs =
      dataFn.typeDefs
       + '\n'
