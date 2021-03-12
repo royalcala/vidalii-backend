@@ -1,9 +1,8 @@
 {
   "name": "@vidalii/backend",
-  "version": "0.0.24",
-  "bin": {
-    "backend": "cli.js"
-  },
+  "version": "0.0.25",
+  "bin": "./cli.js",
+  "main": "dist",
   "author": {
     "name": "Roy Alcala Ortiz",
     "email": "alcala.rao@gmail.com"
@@ -27,6 +26,7 @@
   "dependencies": {
     "@mikro-orm/core": "^4.4.4",
     "@mikro-orm/migrations": "^4.4.4",
+    "@mikro-orm/mongodb": "^4.4.4",
     "@mikro-orm/reflection": "^4.4.4",
     "@mikro-orm/sql-highlighter": "^1.0.1",
     "@mikro-orm/sqlite": "^4.4.4",
@@ -35,6 +35,7 @@
     "fs-extra": "^9.1.0",
     "glob": "^7.1.6",
     "graphql": "^15.5.0",
+    "graphql-request": "^3.4.0",
     "graphql-tools": "^7.0.4",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^1.1.1",

@@ -37,6 +37,10 @@ class VidaliiService {
     await this.db.start(this.cli)
     await this.server.start(this.db, this.api, this.cli)
   }
+  public async stop() {
+    await this.server.server.stop()
+    console.error('📌 Server stopped')
+  }
 }
 
 export default new VidaliiService()

@@ -2,12 +2,12 @@ import { TsMorphMetadataProvider } from '@mikro-orm/reflection'
 import { EntityClass, EntityClassGroup } from '@mikro-orm/core/typings';
 import { SqlHighlighter } from '@mikro-orm/sql-highlighter';
 
-import { Connection, IDatabaseDriver, MikroORM, EntityManager, Options, AnyEntity, EntitySchema } from '@mikro-orm/core';
+import { Connection, IDatabaseDriver, MikroORM, EntityManager, Options, AnyEntity, wrap } from '@mikro-orm/core';
 import { OptionsCli } from './service.cli';
 // import { Author } from "./test/test1/Author.entity";
 // import { BaseEntity } from "./test/test1/BaseEntity.entity";
 export type Em = EntityManager<IDatabaseDriver<Connection>>
-
+export { wrap }
 
 export class DB {
     public entities = new Map() as Map<string, EntityClass<AnyEntity>>
@@ -24,6 +24,9 @@ export class DB {
         // entities: [Author, BaseEntity],
         highlighter: new SqlHighlighter(),
         debug: true,
+        batchSize: 500,
+        useBatchUpdates: true,
+        useBatchInserts: true,
 
     }
     public orm: MikroORM<IDatabaseDriver<Connection>>
@@ -39,7 +42,7 @@ export class DB {
         try {
             this.ormConfig.migrations = {
                 path: cli.DB_PATH,
-                tableName: 'migrations',
+                tableName: '_migrations',
                 transactional: true
             }
             this.ormConfig.entities = [cli.INPUT + '.entity.ts']

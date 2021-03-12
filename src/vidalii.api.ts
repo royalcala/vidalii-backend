@@ -38,18 +38,22 @@ export class Api {
       dataPlain.resolvers.Mutation = Object.fromEntries(this.resolver.Mutation)
     return dataPlain
   }
-  private async getGqlClass(cli:OptionsCli) {
+  private async getGqlClass(cli: OptionsCli) {
     const dataClass = await buildTypeDefsAndResolvers({
       resolvers: [cli.INPUT + ".api.{ts,js}", __dirname + '/vidalii.default.api.{ts,js}'],
+      //by default all the fields are required! {nullable:false}
+      nullableByDefault: false,
+      //by default validate with class validator
+      validate: true
     })
     return dataClass
   }
 
-  public async getSchemaApi(cli:OptionsCli) {
+  public async getSchemaApi(cli: OptionsCli) {
     const dataClass = await this.getGqlClass(cli)
     const dataFn = this.getGqlPlain()
     const typeDefs =
-     dataFn.typeDefs
+      dataFn.typeDefs
       + '\n'
       + dataClass.typeDefs
     const resolvers = {
@@ -58,7 +62,7 @@ export class Api {
     }
     const schema = makeExecutableSchema({
       typeDefs,
-      resolvers,      
+      resolvers,
     })
     return schema
   }

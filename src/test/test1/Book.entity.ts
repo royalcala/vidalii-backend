@@ -1,4 +1,4 @@
-import { api,orm } from '../..';
+import { api,orm,val } from '../..';
 import Vidalii from '../../vidalii'
 import { MaxLength, Length } from "class-validator";
 
@@ -8,7 +8,7 @@ export class book{
   @orm.PrimaryKey()
   _id: String = '1'
 
-  @MaxLength(1,{
+  @val.MaxLength(1,{
     message: 'name is too big',
   })
   @api.Field()

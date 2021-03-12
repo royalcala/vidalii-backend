@@ -6,10 +6,10 @@ import Path from "path";
 
 
 export type OptionsCli = {
-    INPUT: string
-    ENV: 'production' | 'testing',
-    PORT: number,
-    DB_PATH: string,
+    INPUT?: string
+    ENV?: 'production' | 'testing',
+    PORT?: number,
+    DB_PATH?: string,
     // DB_MIGRATIONS: string,
     // DB_CACHE: string
 
@@ -66,6 +66,7 @@ yargs
 
         },
         async (args: OptionsCli) => {
+            console.log(`optionsCli:${args}`)
             const packageJson = require('../package.json')
             console.log(`${packageJson.name}:${packageJson.version}`)
             if (!fs.existsSync(args.DB_PATH)) {

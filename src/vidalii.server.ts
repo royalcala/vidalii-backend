@@ -5,6 +5,7 @@ import type { Api } from "./vidalii.api";
 import type { DB, Em } from "./vidalii.db";
 import { OptionsCli } from './service.cli';
 import { ApolloServer } from 'apollo-server';
+import { servicesVersion } from 'typescript';
 
 export interface Context {
     em: Em
@@ -12,12 +13,12 @@ export interface Context {
 
 export class VServer {
     private host: express.Application
-    private server: Server
+    public server: ApolloServer
     public async start(db: DB, api: Api, cli: OptionsCli) {
         try {
             const schema = await api.getSchemaApi(cli)
 
-            const server = new ApolloServer({
+            this.server  = new ApolloServer({
                 schema,
                 playground: true,
                 context: (): Context => ({ em: db.orm?.em?.fork() || 'no database init' }) as Context,
@@ -37,7 +38,7 @@ export class VServer {
                 ],
             })
             // Start the server
-            const { url } = await server.listen(cli.PORT)
+            const { url } = await this.server.listen(cli.PORT)            
             console.log(`🚀Server is running, GraphQL Playground available at ${url}`);
         } catch (error) {
             console.error('📌 Could not start server', error)
