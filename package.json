@@ -32,6 +32,7 @@
     "@mikro-orm/sqlite": "^4.4.4",
     "apollo-server": "^2.21.1",
     "class-validator": "^0.13.1",
+    "dataloader": "^2.0.0",
     "fs-extra": "^9.1.0",
     "glob": "^7.1.6",
     "graphql": "^15.5.0",
@@ -43,6 +44,7 @@
     "yargs": "^15.4.1"
   },
   "devDependencies": {
-    "@types/fs-extra": "^9.0.8"
+    "@types/fs-extra": "^9.0.8",
+    "@types/yargs": "^16.0.0"
   }
 }

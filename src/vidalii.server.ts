@@ -1,14 +1,14 @@
 import express from 'express';
 // import 'express-async-errors';
-import { Server } from 'http';
 import type { Api } from "./vidalii.api";
 import type { DB, Em } from "./vidalii.db";
 import { OptionsCli } from './service.cli';
 import { ApolloServer } from 'apollo-server';
-import { servicesVersion } from 'typescript';
+import DataLoader from 'dataloader';
 
 export interface Context {
-    em: Em
+    em: Em,
+    dataLoader: Map<string, DataLoader<any, any, any>>
 }
 
 export class VServer {
@@ -21,7 +21,10 @@ export class VServer {
             this.server = new ApolloServer({
                 schema,
                 playground: true,
-                context: (): Context => ({ em: db.orm?.em?.fork() || 'no database init' }) as Context,
+                context: (): Context => ({
+                    em: db.orm?.em?.fork() || 'no database init',
+                    dataLoader: new Map()
+                }) as Context,
                 plugins: [
                     {
                         requestDidStart: () => ({

@@ -10,6 +10,7 @@ export type OptionsCli = {
     ENV?: 'production' | 'testing',
     PORT?: number,
     DB_PATH?: string,
+    DEBUG?:boolean
     // DB_MIGRATIONS: string,
     // DB_CACHE: string
 
@@ -46,22 +47,11 @@ yargs
                         return Path.resolve(value)
                     }
                 })
-            // .option('DB_MIGRATIONS', {
-            //     type: 'string',
-            //     default: '.',
-            //     description: '',
-            //     coerce: (value) => {
-            //         return Path.resolve(value)
-            //     }
-            // })
-            // .option('DB_CACHE', {
-            //     type: 'string',
-            //     default: '.',
-            //     description: 'entity metadata ',
-            //     coerce: (value) => {
-            //         return Path.resolve(value)
-            //     }
-            // })
+                .option('DEBUG', {
+                    type: 'boolean',
+                    default: false,
+                    description: ''
+                })
 
 
         },

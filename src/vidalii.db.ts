@@ -11,24 +11,7 @@ export { wrap }
 
 export class DB {
     public entities = new Map() as Map<string, EntityClass<AnyEntity>>
-    public ormConfig: Options = {
-        metadataProvider: TsMorphMetadataProvider,
-        // migrations: {
-        //     path: './src/migrations',//TODO define in root path
-        //     tableName: 'migrations',
-        //     transactional: true,
-        // },
-        tsNode: process.env.NODE_DEV === 'true' ? true : false,
-        type: 'sqlite',
-        // as we are using class references here, we don't need to specify `entitiesTs` option
-        // entities: [Author, BaseEntity],
-        highlighter: new SqlHighlighter(),
-        debug: true,
-        batchSize: 500,
-        useBatchUpdates: true,
-        useBatchInserts: true,
-
-    }
+    public ormConfig: Options
     public orm: MikroORM<IDatabaseDriver<Connection>>
 
     public addEntity(entity: EntityClass<AnyEntity>, options: 'replace' = 'replace') {
@@ -40,18 +23,28 @@ export class DB {
 
     public async start(cli: OptionsCli): Promise<void> {
         try {
-            this.ormConfig.migrations = {
-                path: cli.DB_PATH,
-                tableName: '_migrations',
-                transactional: true
-            }
-            this.ormConfig.entities = [cli.INPUT + '.entity.ts']
-            // this.ormConfig.entitiesTs = ['src/**/*.entity.ts']
-            this.ormConfig.dbName = cli.DB_PATH + '/data.db'
-            this.ormConfig.cache = {
-                enabled: true,
-                pretty: true,
-                options: { cacheDir: cli.DB_PATH }
+            this.ormConfig = {
+                metadataProvider: TsMorphMetadataProvider,
+                tsNode: process.env.NODE_DEV === 'true' ? true : false,
+                type: 'sqlite',
+                highlighter: new SqlHighlighter(),
+                batchSize: 500,
+                useBatchUpdates: true,
+                useBatchInserts: true,
+                migrations: {
+                    path: cli.DB_PATH,
+                    tableName: '_migrations',
+                    transactional: true
+                },
+                entities: [cli.INPUT + '.entity.ts'],
+                // entitiesTs =['src/**/*.entity.ts']
+                dbName: cli.DB_PATH + '/data.db',
+                cache: {
+                    enabled: true,
+                    pretty: true,
+                    options: { cacheDir: cli.DB_PATH }
+                },
+                debug: cli.DEBUG
             }
             // this.ormConfig.entities = [...this.entities.values()] as any
             // this.ormConfig.dbName = 'src/test/test1/data.db'

@@ -42,7 +42,7 @@ export class Api {
     const dataClass = await buildTypeDefsAndResolvers({
       resolvers: [cli.INPUT + ".api.{ts,js}", __dirname + '/vidalii.default.api.{ts,js}'],
       //by default all the fields are required! {nullable:false}
-      nullableByDefault: false,
+      nullableByDefault: true,
       //by default validate with class validator
       validate: false
     })
