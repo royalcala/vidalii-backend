@@ -44,7 +44,7 @@ export class Api {
       //by default all the fields are required! {nullable:false}
       nullableByDefault: false,
       //by default validate with class validator
-      validate: true
+      validate: false
     })
     return dataClass
   }

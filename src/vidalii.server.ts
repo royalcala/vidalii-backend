@@ -18,7 +18,7 @@ export class VServer {
         try {
             const schema = await api.getSchemaApi(cli)
 
-            this.server  = new ApolloServer({
+            this.server = new ApolloServer({
                 schema,
                 playground: true,
                 context: (): Context => ({ em: db.orm?.em?.fork() || 'no database init' }) as Context,
@@ -27,18 +27,25 @@ export class VServer {
                         requestDidStart: () => ({
                             willSendResponse: async (data) => {
                                 const context = data.context as Context
-                                // await db.flush()//save all the data to the database  
+                                //save all the data to the database
+                                //THIS USE TRANSACTIONS BY DEFAULT  
                                 await context.em.flush()
                                 // if (operationName === 'holis') {
                                 //     // console.log('**********willSendResponse', { operationName, context, response })
                                 // }
                             },
-                        }),
+                            didEncounterErrors: async (data) => {
+                                const context = data.context as Context
+                                context.em.clear()
+                            }
+                        }
+                            //TODO didEncounterErrors
+                        ),
                     },
                 ],
             })
             // Start the server
-            const { url } = await this.server.listen(cli.PORT)            
+            const { url } = await this.server.listen(cli.PORT)
             console.log(`🚀Server is running, GraphQL Playground available at ${url}`);
         } catch (error) {
             console.error('📌 Could not start server', error)
