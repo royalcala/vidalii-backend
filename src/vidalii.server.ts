@@ -3,17 +3,28 @@ import express from 'express';
 import type { Api } from "./vidalii.api";
 import type { DB, Em } from "./vidalii.db";
 import { OptionsCli } from './service.cli';
-import { ApolloServer } from 'apollo-server';
+import { ApolloServer, } from 'apollo-server';
 import DataLoader from 'dataloader';
+import { ExecutionParams } from 'graphql-tools';
 
 export interface Context {
     em: Em,
     dataLoader: Map<string, DataLoader<any, any, any>>
 }
-
+export interface ExpressContext {
+    req: express.Request;
+    res: express.Response;
+    connection?: ExecutionParams;
+}
+export type FnContext = (data: ExpressContext) => object
 export class VServer {
     private host: express.Application
     public server: ApolloServer
+
+    private middlewareContext: FnContext[] = []
+    public addContext(fnContext: FnContext) {
+        this.middlewareContext.push(fnContext)
+    }
     public async start(db: DB, api: Api, cli: OptionsCli) {
         try {
             const schema = await api.getSchemaApi(cli)
@@ -21,10 +32,22 @@ export class VServer {
             this.server = new ApolloServer({
                 schema,
                 playground: true,
-                context: (): Context => ({
-                    em: db.orm?.em?.fork() || 'no database init',
-                    dataLoader: new Map()
-                }) as Context,
+                context: async (data: ExpressContext): Promise<Context> => {
+                    let mcontext = {}
+                    for (let index = 0; index < this.middlewareContext.length; index++) {
+                        let newdata = await this.middlewareContext[index](data)
+                        mcontext = {
+                            ...mcontext,
+                            ...newdata
+                        }
+
+                    }
+                    return ({
+                        ...mcontext,
+                        em: db.orm?.em?.fork() || 'no database init',
+                        dataLoader: new Map(),
+                    }) as Context
+                },
                 plugins: [
                     {
                         requestDidStart: () => ({
