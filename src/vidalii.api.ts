@@ -1,30 +1,41 @@
 import { makeExecutableSchema } from 'graphql-tools'
-import { buildSchema, buildTypeDefsAndResolvers, Resolver, Query, Mutation } from 'type-graphql';
+import { buildTypeDefsAndResolvers, } from 'type-graphql';
 import { OptionsCli } from './service.cli';
-
+import { composeResolvers } from "graphql-tools";
 
 export class Api {
   public type = new Map() as Map<string, string>
   public resolver = {
     Query: new Map() as Map<string, Function>,
     Mutation: new Map() as Map<string, Function>,
-    Type: new Map() as Map<string, Function>
+    Type: new Map() as Map<string, Function>,
   }
+  public resolversComposition = new Map() as Map<string, Function[]>
 
+  public addResolversComposition(nested: string, fns: Function[]) {
+    if (this.resolversComposition.has(nested)) {
+      const data = this.resolversComposition.get(nested)
+      data.push(...fns)
+      this.resolversComposition.set(nested, data)
+    }
+    this.resolversComposition.set(nested, fns)
+  }
+  public addResolver(type: keyof Api['resolver'], resolver: Function
+    // , options: 'replace' | 'pre' | 'post' = 'replace'
+  ) {
+    // console.log('addResolver:', resolver.name)
+    // const optionReplace = (type: keyof Api['resolver'], resolver) => {
+    this.resolver[type].set(resolver.name, resolver)
+    // }
+    // switch (options) {
+    //   case 'replace':
+    //     optionReplace(type, resolver)
+    //     break;
+    // }
+  }
   public addType(name: string, type: string) {
     // console.log('addType', name)
     this.type.set(name, type)
-  }
-  public addResolver(type: keyof Api['resolver'], resolver: Function, options: 'replace' | 'pre' | 'post' = 'replace') {
-    // console.log('addResolver:', resolver.name)
-    const optionReplace = (type: keyof Api['resolver'], resolver) => {
-      this.resolver[type].set(resolver.name, resolver)
-    }
-    switch (options) {
-      case 'replace':
-        optionReplace(type, resolver)
-        break;
-    }
   }
   private getGqlPlain() {
     const dataPlain = {
@@ -44,7 +55,8 @@ export class Api {
       //by default all the fields are required! {nullable:false}
       nullableByDefault: true,
       //by default validate with class validator
-      validate: false
+      validate: false      
+
     })
     return dataClass
   }
@@ -62,7 +74,7 @@ export class Api {
     }
     const schema = makeExecutableSchema({
       typeDefs,
-      resolvers,
+      resolvers: composeResolvers(resolvers, Object.fromEntries(this.resolversComposition) as any)
     })
     return schema
   }
