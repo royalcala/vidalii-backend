@@ -11,15 +11,27 @@ export class Api {
     Type: new Map() as Map<string, Function>,
   }
   public resolversComposition = new Map() as Map<string, Function[]>
-
-  public addResolversComposition(nested: string, fns: Function[]) {
-    if (this.resolversComposition.has(nested)) {
-      const data = this.resolversComposition.get(nested)
-      data.push(...fns)
-      this.resolversComposition.set(nested, data)
+  public addResolversComposition(nested: string, fns: Function[], pos: 'before' | 'after' = 'after') {
+    switch (pos) {
+      case 'before':
+        if (this.resolversComposition.has(nested)) {
+          const data = this.resolversComposition.get(nested)
+          fns.push(...data)
+          this.resolversComposition.set(nested, fns)
+        }
+        this.resolversComposition.set(nested, fns)
+        break;
+      case 'after':
+        if (this.resolversComposition.has(nested)) {
+          const data = this.resolversComposition.get(nested)
+          data.push(...fns)
+          this.resolversComposition.set(nested, data)
+        }
+        this.resolversComposition.set(nested, fns)
+        break;
     }
-    this.resolversComposition.set(nested, fns)
   }
+  
   public addResolver(type: keyof Api['resolver'], resolver: Function
     // , options: 'replace' | 'pre' | 'post' = 'replace'
   ) {
@@ -55,7 +67,7 @@ export class Api {
       //by default all the fields are required! {nullable:false}
       nullableByDefault: true,
       //by default validate with class validator
-      validate: false      
+      validate: false
 
     })
     return dataClass

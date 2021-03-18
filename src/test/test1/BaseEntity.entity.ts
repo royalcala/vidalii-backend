@@ -14,4 +14,4 @@ export abstract class BaseEntity {
 }
 
 
-Vidalii.db.addEntity(BaseEntity)
+// Vidalii.db.addEntity(BaseEntity)

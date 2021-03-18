@@ -1,6 +1,6 @@
-import { PrimaryKey } from '@mikro-orm/core';
+import { Index, PrimaryKey } from '@mikro-orm/core';
 import Vidalii from '../../vidalii'
-import { Cascade, Collection, Entity, OneToMany, Property, ManyToOne, Unique } from '../../vidalii.orm';
+import { Cascade, Collection, Entity, OneToMany, Property, ManyToOne, Unique } from '../../vidalii.db.orm';
 
 // import { Book } from '.';
 import { BaseEntity } from './BaseEntity.entity';
@@ -9,7 +9,8 @@ import { BaseEntity } from './BaseEntity.entity';
 export class Author extends BaseEntity {
   @PrimaryKey()
   _id: string
-
+  
+  @Index()
   @Property()
   name: string;
 
@@ -39,4 +40,4 @@ export class Author extends BaseEntity {
 
 }
 
-Vidalii.db.addEntity(Author)
+// Vidalii.db.addEntity(Author)

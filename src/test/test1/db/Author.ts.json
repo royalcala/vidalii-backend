@@ -96,7 +96,11 @@
     ],
     "filters": {},
     "hooks": {},
-    "indexes": [],
+    "indexes": [
+      {
+        "properties": "name"
+      }
+    ],
     "uniques": [],
     "className": "Author",
     "path": "./src/test/test1/Author.entity.ts",
@@ -111,6 +115,6 @@
     "collection": "author"
   },
   "origin": "./src/test/test1/Author.entity.ts",
-  "hash": "d9e7715eff404948d2951066753bd980",
+  "hash": "71a65a5fe814340c26f2964be8989e08",
   "version": "4.4.4"
 }
