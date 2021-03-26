@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[25],{97:function(a){a.exports=JSON.parse('{"allTagsPath":"/vidalii-backend/blog/tags","slug":"facebook","name":"facebook","count":1,"permalink":"/vidalii-backend/blog/tags/facebook"}')}}]);
