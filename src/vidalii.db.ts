@@ -1,7 +1,7 @@
 import { TsMorphMetadataProvider } from '@mikro-orm/reflection'
 import { SqlHighlighter } from '@mikro-orm/sql-highlighter';
 import { Connection, IDatabaseDriver, MikroORM, EntityManager, Options, AnyEntity, wrap } from '@mikro-orm/core';
-import { OptionsCli } from './service.cli';
+import { OptionsCli } from './service.server.command';
 import glob from 'glob';
 
 export type Em = EntityManager<IDatabaseDriver<Connection>>

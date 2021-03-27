@@ -15,8 +15,8 @@
   "scripts": {
     "test:service:test1": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/service.cli start --INPUT=src/test/test1/**/* --DB_PATH=src/test/test1/db'",
     "test:cli:graphql": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/graphql.cli generate INPUT=test/test1 --OUTPUT=src/test/test1'",
-    "test:cli": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/cli start'",
-    "test:cli:help": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/cli start --help'",
+    "test:cli": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/service.cli start'",
+    "test:cli:help": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/service.cli start --help'",
     "git:stage:all": " git add .",
     "git:commit": "git commit -m '...'",
     "create:dist": "rm -rf dist && mkdir dist && tsc --project tsconfig.json",
@@ -39,6 +39,7 @@
     "graphql-request": "^3.4.0",
     "graphql-tools": "^7.0.4",
     "reflect-metadata": "^0.1.13",
+    "symlink-dir": "^4.1.0",
     "type-graphql": "^1.1.1",
     "typescript": "^4.2.2",
     "yargs": "^15.4.1"
