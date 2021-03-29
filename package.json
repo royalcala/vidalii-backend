@@ -24,7 +24,7 @@
     "git:stage:all": " git add .",
     "git:commit": "git commit -m '...'",
     "create:dist": "rm -rf dist && mkdir dist && tsc --project tsconfig.json",
-    "publish:public": "npm publish",
+    "publish:public": " npm version patch && npm publish",
     "publish:public:patch:git": "npm run git:stage:all && npm run git:commit && npm version patch && npm run create:dist && npm publish"
   },
   "dependencies": {
