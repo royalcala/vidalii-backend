@@ -1,9 +1,9 @@
 {
   "name": "@vidalii/backend",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "bin": {
-    "ms": "./ms_cli.js",
-    "components":"./components_cli.js"
+    "ms": "ms_cli.js",
+    "components": "components_cli.js"
   },
   "main": "dist",
   "author": {
