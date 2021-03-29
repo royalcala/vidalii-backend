@@ -1,7 +1,10 @@
 {
   "name": "@vidalii/backend",
   "version": "0.0.25",
-  "bin": "./cli.js",
+  "bin": {
+    "ms": "./ms_cli.js",
+    "components":"./components_cli.js"
+  },
   "main": "dist",
   "author": {
     "name": "Roy Alcala Ortiz",

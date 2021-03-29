@@ -1,20 +1,69 @@
 #!/usr/bin/env node
-import yargs from 'yargs'
-import { action, options } from "./service.server.command";
-import { action as linksAction, options as linksOptions } from "./service.links.command";
+import yargs from "yargs"
+import Vidalii from "./vidalii";
+import fs from "fs";
+import Path from "path";
 
-
+export type OptionsCli = {
+    INPUT?: string
+    ENV?: 'production' | 'testing',
+    PORT?: number,
+    DB_PATH?: string,
+    DEBUG?:boolean
+    // DB_MIGRATIONS: string,
+    // DB_CACHE: string
+}
 
 yargs
     .command(
         'start', 'vidalii service',
-        options,
-        action
-    )
-    .command(
-        'components', 'import vidalii components from node_modules',
-        //@ts-ignore
-        linksOptions,
-        linksAction
+        (yargs: yargs.Argv<OptionsCli>) => {
+            yargs
+                .option('INPUT', {
+                    describe: 'use glob pattern',
+                    type: 'string',
+                    default: 'src/**/*',
+                    coerce: (value) => {
+                        return Path.resolve(value)
+                    }
+                })
+                // .option('ENV', {
+                //     type: 'string',
+                //     choices: ['production', 'testing'],
+                //     default: 'production'
+                // })
+                .option('PORT', {
+                    type: 'number',
+                    default: 4000
+                })
+                //TODO only for slite
+                .option('DB_PATH', {
+                    type: 'string',
+                    default: '.',
+                    description: 'directory for local db, migrations and cache',
+                    coerce: (value) => {
+                        return Path.resolve(value)
+                    }
+                })
+                .option('DEBUG', {
+                    type: 'boolean',
+                    default: false,
+                    description: ''
+                })
+        
+        
+        },
+        async (args: OptionsCli) => {
+            console.log(`optionsCli:${args}`)
+            const packageJson = require('../package.json')
+            console.log(`${packageJson.name}:${packageJson.version}`)
+            if (!fs.existsSync(args.DB_PATH)) {
+                fs.mkdirSync(args.DB_PATH, { recursive: true })
+                console.log(`Created data directory:${args.DB_PATH}`)
+            }
+            else
+                console.log(`Using data directory:${args.DB_PATH}`)
+            await Vidalii.start(args)
+        }
     )
     .argv
