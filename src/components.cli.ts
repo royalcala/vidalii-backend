@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 import yargs from "yargs"
 import Path from "path";
-import symlinkDir from "symlink-dir";
+import fse from "fs-extra";
+import glob from 'glob'
 import { spawn } from "child_process";
 export type OptionsCli = {
     ROOT?: string
@@ -15,7 +16,7 @@ type NpmDependencies = {
 }
 yargs
     .command(
-        'link', 'link components',
+        'extract', 'components copy',
         (yargs: yargs.Argv<OptionsCli>) => {
             // yargs
             //     .option('ROOT', {
@@ -29,30 +30,38 @@ yargs
         },
         async (args: OptionsCli) => {
             const root = Path.resolve('.')
-            const pathComponents = `${root}/src/components`
             const ls = spawn('npm', ['ls', '-json', '-long']);
-        
+
             ls.stdout.on('data', (data) => {
                 const npmLs = JSON.parse(data)
                 const dependencies = Object.values(npmLs.dependencies) as any as NpmDependencies[]
-        
-                // console.log(dependencies)
-                // console.log(Object.keys(npmLs))
-        
+
                 for (let index = 0; index < dependencies.length; index++) {
                     const element = dependencies[index];
                     const packageJson = require(`${element.path}/package.json`)
                     if (packageJson?.vidalii) {
-                        symlinkDir(`${element.path}/src/components`, pathComponents)
+                        glob.sync(`${element.path}/src/components/*`).forEach(
+                            (src) => {
+                                const arr = src.split('/')
+                                const lastName = arr[arr.length - 1]
+                                const dst = root + '/src/components/' + lastName
+                                if (fse.pathExistsSync(src)) {
+                                    console.log(`Remove directory for extract again:${lastName}.`)
+                                } else
+                                    fse.copySync(src, dst)
+
+                            }
+                        )
+
                     }
                 }
-        
+
             });
-        
+
             ls.stderr.on('data', (data) => {
                 console.error(`stderr: ${data}`);
             });
-        
+
             ls.on('close', (code) => {
                 // console.log(`child process exited with code ${code}`);
             });

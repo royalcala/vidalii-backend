@@ -6,6 +6,7 @@
     "components": "./cli/components_cli.js"
   },
   "main": "dist",
+  "types": "dist",
   "author": {
     "name": "Roy Alcala Ortiz",
     "email": "alcala.rao@gmail.com"
@@ -43,7 +44,6 @@
     "graphql-request": "^3.4.0",
     "graphql-tools": "^7.0.4",
     "reflect-metadata": "^0.1.13",
-    "symlink-dir": "^4.1.0",
     "type-graphql": "^1.1.1",
     "typescript": "^4.2.2",
     "yargs": "^15.4.1"
