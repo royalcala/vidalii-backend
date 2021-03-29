@@ -12,7 +12,8 @@ yargs
         action
     )
     .command(
-        'links', 'import links from node_modules',
+        'components', 'import vidalii components from node_modules',
+        //@ts-ignore
         linksOptions,
         linksAction
     )

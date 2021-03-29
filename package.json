@@ -13,6 +13,7 @@
     "cli.js"
   ],
   "scripts": {
+    "test:npmls": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/service.cli components'",
     "test:service:test1": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/service.cli start --INPUT=src/test/test1/**/* --DB_PATH=src/test/test1/db'",
     "test:cli:graphql": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/graphql.cli generate INPUT=test/test1 --OUTPUT=src/test/test1'",
     "test:cli": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/service.cli start'",

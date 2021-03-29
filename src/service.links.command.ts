@@ -1,31 +1,57 @@
 import yargs from "yargs"
-import Vidalii from "./vidalii";
-import fs from "fs";
 import Path from "path";
-import symlink from "symlink-dir";
-
+import symlinkDir from "symlink-dir";
+import { spawn } from "child_process";
 export type OptionsCli = {
-    NODE_MODULES?: string
+    ROOT?: string
+
 }
 
 export const options = (yargs: yargs.Argv<OptionsCli>) => {
-    yargs
-        .option('NODE_MODUlES', {
-            describe: 'path to node_modules',
-            type: 'string',
-            default: 'node_modules',
-        })
+    // yargs
+    //     .option('ROOT', {
+    //         describe: 'root path',
+    //         type: 'string',
+    //         default: '.',
+    //         coerce: (value) => {
+    //             return Path.resolve(value)
+    //         }
+    //     })
 }
 
+type NpmDependencies = {
+    version: number,
+    resolved: string//http path on npm server  
+    name: string,
+    path: string
+}
 export const action = async (args: OptionsCli) => {
-    // console.log(`optionsCli:${args}`)
-    // const packageJson = require('../package.json')
-    // console.log(`${packageJson.name}:${packageJson.version}`)
-    // if (!fs.existsSync(args.DB_PATH)) {
-    //     fs.mkdirSync(args.DB_PATH, { recursive: true })
-    //     console.log(`Created data directory:${args.DB_PATH}`)
-    // }
-    // else
-    //     console.log(`Using data directory:${args.DB_PATH}`)
-    // await Vidalii.start(args)
+    const root = Path.resolve('.')
+    const pathComponents = `${root}/src/components`
+    const ls = spawn('npm', ['ls', '-json', '-long']);
+
+    ls.stdout.on('data', (data) => {
+        const npmLs = JSON.parse(data)
+        const dependencies = Object.values(npmLs.dependencies) as any as NpmDependencies[]
+
+        // console.log(dependencies)
+        // console.log(Object.keys(npmLs))
+
+        for (let index = 0; index < dependencies.length; index++) {
+            const element = dependencies[index];
+            const packageJson = require(`${element.path}/package.json`)
+            if (packageJson?.vidalii) {
+                symlinkDir(`${element.path}/src/components`, pathComponents)
+            }
+        }
+
+    });
+
+    ls.stderr.on('data', (data) => {
+        console.error(`stderr: ${data}`);
+    });
+
+    ls.on('close', (code) => {
+        // console.log(`child process exited with code ${code}`);
+    });
 }
