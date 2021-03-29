@@ -2,7 +2,7 @@ import express from 'express';
 // import 'express-async-errors';
 import type { Api } from "./vidalii.api";
 import type { DB, Em } from "./vidalii.db";
-import { OptionsCli } from './service.server.command';
+import { OptionsCli } from './service.cli';
 import { ApolloServer, } from 'apollo-server';
 import DataLoader from 'dataloader';
 import { ExecutionParams } from 'graphql-tools';

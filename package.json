@@ -1,9 +1,9 @@
 {
   "name": "@vidalii/backend",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "bin": {
-    "ms": "ms_cli.js",
-    "components": "components_cli.js"
+    "ms": "./cli/ms_cli.js",
+    "components": "./cli/components_cli.js"
   },
   "main": "dist",
   "author": {
@@ -13,7 +13,7 @@
   "license": "MIT",
   "files": [
     "dist",
-    "cli.js"
+    "cli"
   ],
   "scripts": {
     "test:npmls": "nodemon --ext ts  --watch '**.*ts' --exec 'ts-node src/service.cli components'",

@@ -1,6 +1,6 @@
 import { makeExecutableSchema } from 'graphql-tools'
 import { buildTypeDefsAndResolvers, } from 'type-graphql';
-import { OptionsCli } from './service.server.command';
+import { OptionsCli } from './service.cli';
 import { composeResolvers } from "graphql-tools";
 
 export class Api {

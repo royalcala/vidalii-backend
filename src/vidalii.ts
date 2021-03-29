@@ -2,7 +2,7 @@ import glob from 'glob'
 import { DB } from "./vidalii.db";
 import { Api } from "./vidalii.api";
 import { VServer } from "./vidalii.server";
-import type { OptionsCli } from './service.server.command';
+import type { OptionsCli } from './service.cli';
 
 class VidaliiService {
   public cli: OptionsCli
