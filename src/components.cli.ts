@@ -45,7 +45,8 @@ yargs
                                 const arr = src.split('/')
                                 const lastName = arr[arr.length - 1]
                                 const dst = root + '/src/components/' + lastName
-                                if (fse.pathExistsSync(src)) {
+                                if (fse.pathExistsSync(dst)) {
+                                    console.log({ src, dst })
                                     console.log(`Remove directory for extract again:${lastName}.`)
                                 } else
                                     fse.copySync(src, dst)
