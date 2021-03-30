@@ -1,6 +1,7 @@
+
 import { TsMorphMetadataProvider } from '@mikro-orm/reflection'
 import { SqlHighlighter } from '@mikro-orm/sql-highlighter';
-import { Connection, IDatabaseDriver, MikroORM, EntityManager, Options, AnyEntity, wrap } from '@mikro-orm/core';
+import { Connection, IDatabaseDriver, MikroORM, EntityManager, Options, AnyEntity, wrap, ReflectMetadataProvider } from '@mikro-orm/core';
 import { OptionsCli } from './service.cli';
 import glob from 'glob';
 
@@ -34,6 +35,7 @@ export class DB {
     private async initOrm(cli: OptionsCli) {
         this.ormConfig = {
             metadataProvider: TsMorphMetadataProvider,
+            // metadataProvider: ReflectMetadataProvider,
             tsNode: process.env.NODE_DEV === 'true' ? true : false,
             type: 'sqlite',
             highlighter: new SqlHighlighter(),
@@ -47,8 +49,12 @@ export class DB {
             //     transactional: true,
             //     pattern: /\.migration\.(ts|js)$/,
             // },
-            entities: [cli.INPUT + '.entity.ts'],
-            // entitiesTs =['src/**/*.entity.ts']
+            entities: [cli.INPUT+'.entity.{js,ts}'],
+            // entities: [cli.INPUT],
+            // baseDir:'/home/vidalii/Documents/softwareCodes/vidalii-server-backend',
+            // entities: ['./dist/**/*'],
+            // entitiesTs: ['./src/**/*'],
+            // entitiesTs: [cli.INPUT + '.entity.ts'],
             dbName: cli.DB_PATH + '/data.db',
             cache: {
                 enabled: true,
